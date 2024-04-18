@@ -11,7 +11,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
+import type {BlockEditProps} from "@wordpress/blocks";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -21,6 +22,10 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 import './editor.scss';
 
+type BlockAttributes = {
+	title: string;
+}
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -29,13 +34,19 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+export default function Edit( { attributes: { title }, setAttributes }: BlockEditProps< BlockAttributes > ) {
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Example Dynamic – hello from the editor!',
-				'expanded-post-title'
-			) }
-		</p>
+		<div { ...useBlockProps() }>
+			<RichText
+				tagName="h1"
+				value={ title }
+				className="wp-block-kek-blocks-about-kek__title"
+				onChange={ ( value ) => {
+					setAttributes( {
+						title: value,
+					} );
+				} }
+			/>
+		</div>
 	);
 }

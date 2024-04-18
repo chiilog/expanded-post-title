@@ -3,13 +3,18 @@
 	"apiVersion": 3,
 	"name": "chiilog-block/expanded-post-title",
 	"version": "0.1.0",
-	"title": "Example Dynamic",
+	"title": "Expanded Post Title",
 	"category": "text",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
 		"html": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string"
+		}
 	},
 	"textdomain": "expanded-post-title",
 	"editorScript": "file:./index.js",
