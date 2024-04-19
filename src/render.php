@@ -9,12 +9,11 @@
 
 $tagName = $attributes['level'] === 0 ? 'p' : 'h' . $attributes['level'];
 
-var_dump($attributes);
 $classes = array();
 if ( isset( $attributes['textAlign'] ) ) {
 	$classes[] = 'has-text-align-' . $attributes['textAlign'];
 }
 ?>
 <<?php echo $tagName; ?> <?php echo get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) ); ?>>
-	<?php echo wp_kses_post( $attributes['title'] ); ?>
+	<?php echo wp_kses_post( get_post_meta( $block->context['postId'], 'expanded_post_title', true ) ); ?>
 </<?php echo $tagName; ?>>
