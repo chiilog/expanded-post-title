@@ -15,6 +15,10 @@
 		"title": {
 			"type": "string",
 			"default": ""
+		},
+		"userEdited": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"usesContext": [ "postId", "postType", "queryId" ],
