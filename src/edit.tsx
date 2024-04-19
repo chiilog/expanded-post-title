@@ -1,18 +1,7 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from '@wordpress/i18n';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import type {BlockEditProps} from "@wordpress/blocks";
+import { useEntityProp } from '@wordpress/core-data';
+import { useEffect } from "@wordpress/element";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -34,13 +23,28 @@ type BlockAttributes = {
  *
  * @return {Element} Element to render.
  */
-export default function Edit( { attributes: { title }, setAttributes }: BlockEditProps< BlockAttributes > ) {
+export default function Edit( { attributes: { title }, setAttributes, context: { postType, postId } }: BlockEditProps< BlockAttributes > ) {
+	const blockProps = useBlockProps();
+	const [ rawTitle = '' ] = useEntityProp(
+		'postType',
+		// @ts-ignore
+		postType,
+		'title',
+		postId
+	);
+	useEffect(() => {
+		if ( title === '' || title === rawTitle ) {
+			setAttributes( {
+				title: rawTitle,
+			} );
+		}
+	}, [ rawTitle ] );
+
 	return (
-		<div { ...useBlockProps() }>
+		<div { ...blockProps }>
 			<RichText
 				tagName="h1"
 				value={ title }
-				className="wp-block-kek-blocks-about-kek__title"
 				onChange={ ( value ) => {
 					setAttributes( {
 						title: value,
