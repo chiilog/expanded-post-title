@@ -29,6 +29,18 @@ function chiilog_block_expanded_post_title_block_init() {
 }
 add_action( 'init', 'chiilog_block_expanded_post_title_block_init' );
 
+add_action( 'enqueue_block_editor_assets', function () {
+	$asset_file = include plugin_dir_path( __FILE__ ) . 'build/metabox.tsx.asset.php';
+
+	wp_enqueue_script(
+		'expanded-post-title-metabox',
+		plugins_url( 'build/metabox.tsx.js', __FILE__ ),
+		$asset_file['dependencies'],
+		$asset_file['version'],
+		true
+	);
+} );
+
 function chiilog_block_expanded_post_title_register_post_meta() {
 	register_meta( 'post', 'expanded_post_title', array(
 		'type' => 'string',

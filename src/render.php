@@ -9,6 +9,7 @@
 
 $tagName = $attributes['level'] === 0 ? 'p' : 'h' . $attributes['level'];
 
+var_dump($attributes);
 $classes = array();
 if ( isset( $attributes['textAlign'] ) ) {
 	$classes[] = 'has-text-align-' . $attributes['textAlign'];
