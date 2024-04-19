@@ -28,3 +28,12 @@ function chiilog_block_expanded_post_title_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'chiilog_block_expanded_post_title_block_init' );
+
+function chiilog_block_expanded_post_title_register_post_meta() {
+	register_meta( 'post', 'expanded_post_title', array(
+		'type' => 'string',
+		'single' => true,
+		'show_in_rest' => true,
+	) );
+}
+add_action( 'init', 'chiilog_block_expanded_post_title_register_post_meta' );
