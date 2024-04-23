@@ -88,7 +88,7 @@ export default function Edit( {
 				} );
 			}
 		}
-	}, [ rawTitle, userEdited ] );
+	}, [ rawTitle ] );
 
 	/**
 	 * titleとカスタムフィールドを入力値で更新する。
