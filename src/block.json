@@ -29,7 +29,7 @@
 			"type": "string"
 		}
 	},
-	"usesContext": [ "postId", "postType" ],
+	"usesContext": [ "postId", "postType", "queryId" ],
 	"textdomain": "expanded-post-title",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
