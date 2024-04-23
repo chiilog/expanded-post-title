@@ -13,7 +13,14 @@ $classes = array();
 if ( isset( $attributes['textAlign'] ) ) {
 	$classes[] = 'has-text-align-' . $attributes['textAlign'];
 }
+
+// expanded_post_title が空だった場合は、通常のタイトルを表示する
+$title = get_post_meta( $block->context['postId'], 'expanded_post_title', true );
+if ( ! $title ) {
+	$title = get_the_title( $block->context['postId'] );
+}
+
 ?>
 <<?php echo $tagName; ?> <?php echo get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) ); ?>>
-	<?php echo wp_kses_post( get_post_meta( $block->context['postId'], 'expanded_post_title', true ) ); ?>
+	<?php echo wp_kses_post( $title ); ?>
 </<?php echo $tagName; ?>>
