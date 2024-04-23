@@ -50,6 +50,9 @@ export default function Edit( {
 		postId
 	);
 	useEffect( () => {
+		/**
+		 * ブロックを編集していない場合はtitleとカスタムフィールドに投稿タイトルを入れる
+		 */
 		if ( ! userEdited ) {
 			setAttributes( {
 				title: rawTitle,
@@ -61,6 +64,12 @@ export default function Edit( {
 		}
 	}, [ rawTitle ] );
 
+	/**
+	 * titleとカスタムフィールドを入力値で更新する。
+	 * 入力したというフラグをつける。
+	 *
+	 * @param value
+	 */
 	const updateTitle = ( value: string ) => {
 		setAttributes( {
 			title: value,
